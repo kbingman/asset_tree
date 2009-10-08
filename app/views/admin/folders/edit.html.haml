@@ -1,0 +1,12 @@
+- @page_title = @folder.name + ' Folder - ' + default_page_title
+- @stylesheets << 'admin/folders'
+- @javascripts << 'admin/foldermap'
+- @javascripts << 'admin/folders'
+
+- body_classes << "reversed"
+
+- render_region :main do |main|
+  - main.edit_header do
+    %h1= t('edit_folder')  
+  - main.edit_form do
+    = render :partial => 'form'

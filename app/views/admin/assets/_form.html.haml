@@ -1,0 +1,31 @@
+- form_for [:admin, :folder, @asset], :html => {:onsubmit_status => onsubmit_status(@asset)}, :html => { :enctype => 'multipart/form-data' } do |f|
+
+  %input{ :type => 'hidden', :name => 'asset[folder_id]', :value => @folder.id }
+  =# f.hidden_field :folder_id
+  .form_area
+    - render_region :form do |form|
+      - form.edit_title do
+        %p.title
+          = f.label :title, t('title')
+          = f.text_field :title, :class => 'textbox activate', :maxlength => 100
+          %span#full_url
+            == #{t('path')}:
+            = @asset.new_record? ? @folder.url : @asset.url
+          
+      - form.edit_content do
+        %p.content
+          = f.label :file, t('choose_a_file_to_upload')
+          = f.file_field :file
+          // = f.label :content, t('body') 
+          // ~ f.text_area :content, :class => "textarea large", :style => "width: 100%"
+        
+  - render_region :form_bottom do |form_bottom|
+    - form_bottom.edit_buttons do
+      %p.buttons{:style=>"clear: left"}
+        = save_model_button(@asset)
+        = save_model_and_continue_editing_button(@asset)
+        = t('or')
+        = link_to t('cancel'), admin_folder_url(@folder)
+    - form_bottom.edit_timestamp do
+      %p.updated_line
+        = updated_stamp @asset

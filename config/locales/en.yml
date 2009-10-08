@@ -1,0 +1,24 @@
+---
+en:
+  asset: Asset
+  assets: Assets
+  choose_a_file_to_upload: Choose a File to Upload
+  creating_folder: Creating Folder
+  delete_folder: Delete Folder
+  edit_folder: Edit Folder
+  file: File
+  files: Files
+  folder: Folder
+  folders: Folders
+  new_asset: New Asset
+  new_folder: New Folder
+  new_root_folder: New Root Folder
+  no_assets: No Assets
+  no_folders: No Folders
+  path: Path
+  remove_folder: Remove Folder
+  removing_folder: Removing Folder
+  title: Title
+  upload_file: Upload File
+  update_folder_contents: Update Folder Contents
+  

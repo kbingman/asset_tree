@@ -1,0 +1,26 @@
+%tr.node.folder{:class =>"level_#{level}", :id => "folder_#{@current_node.id}"}
+  - render_region :node, :locals => {:folder => @current_node, :level => level, :simple => simple} do |node|
+    - node.title_cell do
+      %td.page.folder{:style => "padding-left: #{padding_left(level)}px"}
+        %span.w1
+          - if simple
+            = icon
+            = node_name
+          - else
+            = folder_expander(level) + link_to("#{image('page', :alt => 'folder-icon')} #{node_name}", admin_folder_url(@current_node), :title => @current_node.url)
+            %small.info
+              = @current_node.assets.length
+            = spinner
+    - node.edit_cell do
+      // %td.edit
+      //   = link_to t('edit'), edit_admin_folder_url(@current_node)
+    - node.add_child_cell do
+      %td.add_child
+        = link_to t('add_child'), new_admin_folder_child_url(@current_node)
+    - node.remove_cell do
+      %td.remove
+        = link_to t('remove'), remove_admin_folder_url(@current_node)
+
+- if expanded_folder || @root == @current_node
+  - @current_node.children.each do |child|
+    = render_node child, :level => level + 1, :simple => simple

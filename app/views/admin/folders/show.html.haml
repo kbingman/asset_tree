@@ -1,0 +1,42 @@
+- @page_title = @folder.name + ' Folder - ' + default_page_title
+
+.outset
+  - render_region :top do |top|
+    - top.title do 
+      %h1{ :style => "font-size: 125%; margin: 0 0; padding: 15px 20px; background: #7e7e7e; color: #fff;" }
+        == #{@folder.name}: #{@folder.url}
+       
+  %table#folders.index{:cellspacing => "0", :border => "0", :cellpadding => "0"}
+    %thead
+      %tr
+        - render_region :thead do |thead|
+          - thead.title_header do
+            %th.asset= t('asset')
+          - thead.modify_header do
+            %th.modify= t('modify')
+    %tbody
+      - if @folder.assets.any? 
+        - @folder.assets.each do |asset|
+          %tr.node.level_2
+            - render_region :tbody do |tbody|
+              - tbody.title_cell do
+                %td.asset.page
+                  = image('page', :alt => 'folder-icon')
+                  %span= link_to asset.filename, edit_admin_folder_asset_url(@folder, asset)
+              - tbody.modify_cell do
+                %td.remove
+                  = link_to t('remove'), remove_admin_folder_asset_url(@folder, asset)
+      - else
+        %tr
+          %td.note{:colspan => admin.folder.show.tbody.length}= t('no_assets')
+          
+- render_region :bottom do |bottom|
+  - bottom.new_button do
+    #actions
+      %ul
+        %li= link_to t('upload_file'), new_admin_folder_asset_url(@folder)
+        - if current_user.admin?
+          %li= link_to t('edit_folder'), edit_admin_folder_url(@folder)
+        %li= link_to t('update_folder_contents'), edit_admin_folder_url(@folder)
+
+  

@@ -1,0 +1,58 @@
+== 0.3.5, released 2009-07-24
+
+* Fixed bug where wrapping load error on missing storage engine masks any
+  underlying load errors (i.e. if you load s3_file and missing right_aws it
+  would give you a error on s3_file)
+
+== 0.3.4, released 2009-06-18
+
+* Milton makes a local copy of the source file before identifying as an image
+* Added S3 helper for local testing of S3 functionality to help each further
+  testing of S3 offline
+* Temporarily removed Thumbnail optimization of creating mid-sized file for
+  multiple thumbnail generation (to be re-implemented later)
+
+== 0.3.3, released 2009-06-18
+
+* Milton makes a local copy of the source file before processing now to allow
+  post-processing when using S3 (which probably isn't a good idea ;))
+
+== 0.3.2, released 2009-06-18
+
+* Processors attempt to load at runtime if undefined, fixing post-processing
+  when no recipes are defined with the desired processor
+
+== 0.3.1, released 2009-06-16
+
+* Minor bugfix for release
+
+== 0.3.0, released 2009-06-16
+
+* Full refactor
+* More easily extendable processors
+* Multiple storage options, more easily extendable, comes with Amazon S3
+* Switched to context for testing
+* API changes (see Migrating in README)
+
+== 0.2.4, released 2009-02-16
+
+* Got rid of symlink_aware_mkdir_p as it wasn't actually needed, problem was
+  caused by invalid symlinks in the first place, oops. Left specs as they are
+  still valid.
+
+== 0.2.3, released 2009-02-16
+
+* Added a symlink_aware_mkdir_p to FileUtils to actually fix problem w/ root
+  attachments path being a symlink.
+* Added specs to reproduce error and fix in attachment_spec.rb
+
+== 0.2.2, released 2009-02-16
+
+* Made recreate directories aware of symlinks to avoid trying to recreate the
+  folder attachments are stored in if it's a symlink
+
+== 0.2.1, released 2009-01-16
+  
+* Fixed init.rb to work as a gem
+* Altered gemspec a tad
+* Started CHANGELOG
