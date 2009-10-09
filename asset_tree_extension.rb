@@ -3,7 +3,7 @@ require 'paperclip'
 require File.dirname(__FILE__) + '/lib/files/url_additions'
 include UrlAdditions
 
-class FilesExtension < Radiant::Extension
+class AssetTreeExtension < Radiant::Extension
   version "1.0"
   description "Describe your extension here"
   url "http://yourwebsite.com/files"

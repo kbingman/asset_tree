@@ -13,7 +13,8 @@ class Asset < ActiveRecord::Base
   belongs_to :created_by, :class_name => 'User'
   belongs_to :updated_by, :class_name => 'User'
   
-  validates_attachment_presence
+  validates_presence_of :folder_id
+  validates_presence_of :file_file_name
   validates_uniqueness_of :file_file_name, :scope => :folder_id
   
   def url
