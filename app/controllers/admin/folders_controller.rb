@@ -17,12 +17,18 @@ class Admin::FoldersController < Admin::ResourceController
   def show
     @folder = Folder.find params[:id]
     response_for :singular
-  end      
+  end   
   
   def update
     model.rename_folder(params[model_symbol][:slug])
     model.update_attributes!(params[model_symbol])
     response_for :update               
+  end
+  
+  def import
+    @folder = Folder.find params[:id]
+    @folder.import_assets
+    redirect_to 'show'
   end         
   
   private

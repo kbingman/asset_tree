@@ -7,7 +7,7 @@
       - form.edit_title do
         %p.title
           = f.label :name, t('name')
-          = f.text_field :name, :class => 'textbox activate', :maxlength => 100
+          = f.text_field :name, :class => 'textbox activate', :maxlength => 255
           
       - form.edit_extended_metadata do
         #extended_metadata{:style=>(!meta_errors? ? "display: none" : nil)}

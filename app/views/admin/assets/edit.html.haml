@@ -1,1 +1,15 @@
-= image_tag @asset.public_path
+- @stylesheets << 'admin/folders'
+- @javascripts << 'admin/foldermap'
+- @javascripts << 'admin/folders'
+
+- body_classes << "reversed"
+
+- render_region :main do |main|
+  - main.edit_header do
+    %h1
+      == #{@folder.name}:
+      = t('edit_asset')  
+  - main.edit_form do
+    = render :partial => 'form'
+
+

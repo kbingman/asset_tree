@@ -1,20 +1,21 @@
 class Folder < ActiveRecord::Base
   
   before_create :make_folder
-  before_save :create_assets
   before_destroy :delete_folder
   
   validates_presence_of :name
-  validates_presence_of :slug
-  # validate_format_of :slug
   
-  has_many :assets
+  validates_presence_of :slug
+  validates_format_of :slug, :with => %r{^([-_A-Za-z0-9]*|/)$}
+  validates_uniqueness_of :slug, :scope => :parent_id
+  
+  has_many :assets, :dependent => :destroy
   acts_as_tree :order => 'name'
   belongs_to :created_by, :class_name => 'User'
   belongs_to :updated_by, :class_name => 'User'
   
   def path
-    File.join(RADIANT_ROOT,'public', clean_url(url))
+    File.join(RAILS_ROOT,'public', clean_url(url))
   end
     
   def url
@@ -31,12 +32,22 @@ class Folder < ActiveRecord::Base
   
   def rename_folder(new_name)
     new_path = if parent?
-      File.join(RADIANT_ROOT,'public', parent.url, new_name)
+      File.join(RAILS_ROOT,'public', parent.url, new_name)
     else
-      File.join(RADIANT_ROOT,'public', new_name)
+      File.join(RAILS_ROOT,'public', new_name)
     end
     new_path = clean_url(new_path)
+    FileUtils.mkdir(path) unless File.exists?(path)
     FileUtils.mv(path, new_path) unless new_path == path
+  end
+  
+  def import_assets
+    files.each do |file|
+      name = File.basename(file)
+      unless asset = Asset.first(:conditions => { :folder_id => self.id, :file_file_name => name })
+        Asset.create :folder_id => self.id, :file => File.open(file)
+      end
+    end
   end
   
   def parent?
@@ -49,13 +60,7 @@ class Folder < ActiveRecord::Base
       FileUtils.mkdir_p(path) unless File.exists?(self.path)
     end
     
-    def create_assets
-      files.each do |file|
-        asset = Asset.find_or_create_by_name(File.basename(file))
-        asset.folder_id = self.id
-        asset.save
-      end
-    end
+
     
     def delete_folder
       FileUtils.rm_rf(path)

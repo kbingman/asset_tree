@@ -1,0 +1,17 @@
+%h1= t('remove_asset')
+
+%p 
+  = t('text.assets.remove_warning')
+
+%table.index#snippets{:cellpadding=>0, :cellspacing=>0, :border=>0}
+  %tbody
+    %tr.node.level_1
+      %td.folder
+        = image_tag @asset.thumbnail
+        %span.title= @asset.filename
+
+- form_for [:admin, @folder, @asset], :html => {:method => :delete, :onsubmit_status => "#{t('removing_asset')}&#8230;"} do
+  %p.buttons
+    %input.button{:type=>"submit", :value => t('delete_asset')}/
+    = t('or')
+    = link_to t('cancel'), admin_folders_url

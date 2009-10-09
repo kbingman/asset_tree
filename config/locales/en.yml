@@ -5,6 +5,8 @@ en:
   choose_a_file_to_upload: Choose a File to Upload
   creating_folder: Creating Folder
   delete_folder: Delete Folder
+  delete_asset: Delete Asset
+  edit_asset: Edit Asset
   edit_folder: Edit Folder
   file: File
   files: Files
@@ -16,6 +18,8 @@ en:
   no_assets: No Assets
   no_folders: No Folders
   path: Path
+  remove_asset: Remove Asset
+  removing_asset: Removing Asset
   remove_folder: Remove Folder
   removing_folder: Removing Folder
   title: Title

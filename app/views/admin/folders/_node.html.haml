@@ -3,14 +3,10 @@
     - node.title_cell do
       %td.page.folder{:style => "padding-left: #{padding_left(level)}px"}
         %span.w1
-          - if simple
-            = icon
-            = node_name
-          - else
-            = folder_expander(level) + link_to("#{image('page', :alt => 'folder-icon')} #{node_name}", admin_folder_url(@current_node), :title => @current_node.url)
-            %small.info
-              = @current_node.assets.length
-            = spinner
+          = folder_expander(level) + link_to("#{image('page', :alt => 'folder-icon')} #{node_name}", admin_folder_url(@current_node), :title => @current_node.url)
+          %small.info
+            = @current_node.assets.length
+          = spinner
     - node.edit_cell do
       // %td.edit
       //   = link_to t('edit'), edit_admin_folder_url(@current_node)

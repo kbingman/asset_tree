@@ -21,7 +21,7 @@
             - render_region :tbody do |tbody|
               - tbody.title_cell do
                 %td.asset.page
-                  = image('page', :alt => 'folder-icon')
+                  = image_tag asset.thumbnail
                   %span= link_to asset.filename, edit_admin_folder_asset_url(@folder, asset)
               - tbody.modify_cell do
                 %td.remove
