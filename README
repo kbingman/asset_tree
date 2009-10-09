@@ -1,3 +1,9 @@
-= Files
+This is a new take on an Assets manager for the new Blade release of Radiant and requires the i18n branch at the time of writing, though this will eventually be merged into the Edge version. 
 
-Description goes here
+First, this was written to demonstrate the use of i18n translations within extensions. There is config/locales folder in the extension itself and all relavent languages can go there. 
+
+After a discussion with John Long about asset management, he inspired me to rebuild (steal) the Radiant Site Map, which is in my mind one of the nicest features of Radiant and initially the thing that set it apart from many other CMSs. It works well and as file manager, too and now it sets up a file system with the public folder that mirrors the database. 
+
+There are still some security and validation issues, but for the most part is works nicely. 
+
+The paperclip gem is NOT included, that will need to be installed separately or required in your environment file. 
