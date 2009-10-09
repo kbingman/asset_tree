@@ -7,6 +7,11 @@ class AssetTreeExtension < Radiant::Extension
   version "1.0"
   description "Describe your extension here"
   url "http://yourwebsite.com/files"
+  
+  extension_config do |config| 
+    config.gem 'paperclip' 
+    config.extension 'asset_tree' 
+  end
 
   define_routes do |map|
     map.namespace :admin, :member => { :remove => :get, :import => :post } do |admin|
